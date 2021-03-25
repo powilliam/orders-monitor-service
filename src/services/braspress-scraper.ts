@@ -1,6 +1,6 @@
 import { Browser } from "puppeteer";
 
-import { PuppeteerScraper } from "@abstractions/puppeteer-scrapper";
+import { PuppeteerScraper } from "@abstractions/puppeteer-scraper";
 import { BraspressOrder } from "@root/models/braspress-order";
 
 interface ServiceOptions {
@@ -19,9 +19,9 @@ export class BraspressScraperServiceImpl
     "https://www.braspress.com.br/site/w/tracking/search/:hash/:identifier";
   private static instance?: BraspressScraperService;
 
-  public static getInstance(browser: Browser): BraspressScraperService {
+  public static getInstance(p0: Browser): BraspressScraperService {
     if (this.instance) return this.instance;
-    const newInstance = new BraspressScraperServiceImpl(browser);
+    const newInstance = new BraspressScraperServiceImpl(p0);
     this.instance = newInstance;
     return newInstance;
   }

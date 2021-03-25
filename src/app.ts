@@ -1,3 +1,3 @@
-import express, { json } from "express";
+import express from "express";
 
 export const app = express();
