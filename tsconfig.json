@@ -19,7 +19,8 @@
       "@controllers/*": ["./src/controllers/*"],
       "@services/*": ["./src/services/*"],
       "@abstractions/*": ["./src/abstractions/*"],
-      "@models/*": ["./src/models/*"]
+      "@models/*": ["./src/models/*"],
+      "@helpers/*": ["./src/helpers/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,

@@ -1,6 +1,6 @@
 import { Browser } from "puppeteer";
 
-import { PuppeteerScraper } from "@abstractions/puppeteer-scraper";
+import { BraspressScraperHelper } from "@abstractions/braspress-scraper-helper";
 import { BraspressOrder } from "@root/models/braspress-order";
 
 interface ServiceOptions {
@@ -13,7 +13,7 @@ export interface BraspressScraperService {
 }
 
 export class BraspressScraperServiceImpl
-  extends PuppeteerScraper
+  extends BraspressScraperHelper
   implements BraspressScraperService {
   private static href: string =
     "https://www.braspress.com.br/site/w/tracking/search/:hash/:identifier";
@@ -34,34 +34,6 @@ export class BraspressScraperServiceImpl
       .replace(":hash", hash)
       .replace(":identifier", identifier);
 
-    const page = await this.browser.newPage();
-    await page.goto(filledHref);
-
-    return await page.evaluate(() =>
-      Array.from(document.querySelectorAll("td[align=center]"))
-        .map((it) => it.innerText)
-        .filter((it) => !["", "-"].includes(it))
-        .reduce<string[]>((acc, current) => {
-          if (!acc.includes(current)) {
-            acc.push(current);
-          }
-          return acc;
-        }, [])
-        .reduce(
-          (acumulated, current, index) => {
-            if (index === 0) {
-              acumulated["pedido"] = current;
-            } else if (index === 1) {
-              acumulated["nf"] = current;
-            } else if (index === 2) {
-              acumulated["entrega"] = current;
-            } else if (index === 3) {
-              acumulated["status"] = current;
-            }
-            return acumulated;
-          },
-          { pedido: "", nf: "", entrega: "", status: "" } as BraspressOrder
-        )
-    );
+    return await this.doScraping(filledHref);
   }
 }
