@@ -15,7 +15,12 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@root/*": ["./src/*"]
+      "@root/*": ["./src/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@services/*": ["./src/services/*"],
+      "@abstractions/*": ["./src/abstractions/*"],
+      "@models/*": ["./src/models/*"],
+      "@helpers/*": ["./src/helpers/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,
